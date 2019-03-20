@@ -1,6 +1,6 @@
 {
     "name": "@rockerjs/core",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A lightweight ioc container for node.js",
     "author": {
         "name": "yangli",
@@ -55,5 +55,5 @@
     "directories": {
         "doc": "doc"
     },
-    "main": "./index.js"
+    "main": "./dist/index.js"
 }
