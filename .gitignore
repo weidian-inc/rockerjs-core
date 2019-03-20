@@ -1,0 +1,11 @@
+.git/
+.idea/
+.DS_Store
+node_modules/*
+**/*.js
+tags/*
+.history
+.vscode/
+.nyc_output/
+coverage/
+dist/*

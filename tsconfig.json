@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "mapRoot": "./dist",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "sourceMap": true,
+        "target": "es6"
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/module.ts"
+    ]
+}

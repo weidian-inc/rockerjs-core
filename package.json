@@ -1,0 +1,59 @@
+{
+    "name": "@rockerjs/core",
+    "version": "1.0.0",
+    "description": "A lightweight ioc container for node.js",
+    "author": {
+        "name": "yangli",
+        "email": "yl.yuxiu@foxmail.com",
+        "url": "https://github.com/royalrover"
+    },
+    "scripts": {
+        "build": "npm run clean && tsc",
+        "clean": "rimraf ./dist",
+        "cover": "npm run build && deco dist/test && cd dist && istanbul cover _mocha -x src/errors/**/*.js -- --timeout 10000 --exit --reporter spec --recursive",
+        "dev": "npm run clean && tsc -w",
+        "lint": "tslint ./src/**/*.ts ./src/*.ts",
+        "prepublish": "npm run build",
+        "start": "tsc -w",
+        "test": "npm run build && deco dist/test"
+    },
+    "dependencies": {
+        "reflect-metadata": "^0.1.13"
+    },
+    "devDependencies": {
+        "@rockerjs/tsunit": "^1.0.0",
+        "@types/node": "^7.0.60",
+        "coveralls": "^2.13.0",
+        "istanbul": "^0.4.5",
+        "rimraf": "^2.6.2",
+        "tslint": "^5.14.0",
+        "typescript": "^2.7.2"
+    },
+    "keywords": [
+        "ioc",
+        "di",
+        "javascript",
+        "typescript",
+        "node",
+        "dependency injection",
+        "dependency inversion",
+        "inversion of control container",
+        "AOP",
+        "Aspect Oriented Program"
+    ],
+    "contributors": [{
+        "name": "chemingjun",
+        "email": "chemingjun@weidian.com"
+    }, {
+        "name": "kangzhe",
+        "email": "kangzhe@weidian.com"
+    }, {
+        "name": "dingjunjie",
+        "email": "dingjunjie@weidian.com"
+    }],
+    "license": "MIT",
+    "directories": {
+        "doc": "doc"
+    },
+    "main": "./index.js"
+}

@@ -1,0 +1,28 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "linterOptions": {
+        "exclude": [
+          "test/**"
+        ]
+    },
+    "jsRules": {
+    },
+    "rules": {
+        "array-type": false,
+        "ban-types": false,
+        "one-variable-per-declaration": false,
+        "no-trailing-whitespace": false,
+        "only-arrow-functions": [
+            false
+        ],
+        "ordered-imports": false,
+        "max-classes-per-file": true,
+        "max-line-length": [true, 220],
+        "no-unused-expression": false,
+        "no-shadowed-variable": false
+    },
+    "rulesDirectory": []
+}
