@@ -19,7 +19,7 @@ npm install @rockerjs/core
 ```
 
 
-> @rockerjs/core最佳实践需要结合TypeScript的装饰器一起使用（也可使用接口），因此需要在项目根目录添加 **tsconfig.json** 文件，并配置编译选项 “**experimentalDecorators**”和“**emitDecoratorMetadata**”为 true
+> @rockerjs/core最佳实践需要结合TypeScript的装饰器一起使用（也可使用接口），因此需要在项目根目录添加 **tsconfig.json** 文件，并配置编译选项 “**experimentalDecorators**”和“**emitDecoratorMetadata**”为 true，并推荐编译为ES6语法
 
 
 示例 1
