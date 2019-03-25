@@ -61,7 +61,7 @@ export class Container {
                 }
                 /* istanbul ignore next */
                 globalGeneralProviders.set(def as FunctionConstructor, function(...args) {
-                    return factory(def, ...args);
+                    return factory(def as FunctionConstructor, ...args);
                 });
             }
         });
@@ -82,7 +82,7 @@ export function Inject(...args: any[]): void | any {
     let params = args; 
     const fn = function(target: Function | object, key: string, descriptor: PropertyDescriptor) {
         const targetClazz: FunctionConstructor = (typeof target === "function" ? target : target.constructor) as FunctionConstructor;
-        let dt = Reflect.getMetadata("design:type", target, key);
+        let dt: FunctionConstructor = Reflect.getMetadata("design:type", target, key);
         /* istanbul ignore next */
         if (!dt) {
             dt = Reflect.getMetadata("design:type", target.constructor, key);
@@ -106,7 +106,6 @@ export function Inject(...args: any[]): void | any {
         } else {
             injectProperty(targetClazz, key, dt, params);
         }
-        
         return;
     };
 
@@ -123,14 +122,14 @@ export function Inject(...args: any[]): void | any {
     }
 }
 
-function injectProperty(target: Function, key: string, propertyType: Function, args: any[]) {
+function injectProperty(target: Function, key: string, propertyType: FunctionConstructor, args: any[]) {
     const instanseName = `__${key}__`; // cache instanse
     Object.defineProperty(target.prototype, key, {
         enumerable: true,
         get() {
             let instanse = this[instanseName];
             if (!instanse) {
-                const factoryFn = globalGeneralProviders.get(propertyType as FunctionConstructor);
+                const factoryFn = globalGeneralProviders.get(propertyType);
                 if (factoryFn) {
                     instanse = factoryFn(...args);
                 } else {
@@ -150,8 +149,8 @@ function injectClazz(target: FunctionConstructor, ...args: any[]) {
     const instanseName = `__singleton__`; // cache instanse
     let instance = null;
     if (!target[instanseName]) {
-        const factoryFn: Function = globalGeneralProviders.has(target as FunctionConstructor) ? globalGeneralProviders.get(target as FunctionConstructor)
-            : globalTypedProviders.has(args[0]) && globalTypedProviders.get(args[0]).has(target as FunctionConstructor) ? globalTypedProviders.get(args[0]).get(target as FunctionConstructor) 
+        const factoryFn: Function = globalGeneralProviders.has(target) ? globalGeneralProviders.get(target)
+            : globalTypedProviders.has(args[0]) && globalTypedProviders.get(args[0]).has(target) ? globalTypedProviders.get(args[0]).get(target) 
             : null;
         if (factoryFn) {
             instance = factoryFn(...args);
@@ -164,7 +163,7 @@ function injectClazz(target: FunctionConstructor, ...args: any[]) {
     return target[instanseName];
 }
 
-function factory(fn: any, ...args: any[]) {
+function factory(fn: FunctionConstructor, ...args: any[]) {
     try {
         if (args.length === 1 && typeof(args[0]) === "function") { // Parameters factory
             args = args[0]();
