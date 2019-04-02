@@ -1,6 +1,6 @@
 {
     "name": "@rockerjs/core",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A lightweight ioc container for node.js",
     "author": {
         "name": "yangli",
@@ -41,16 +41,20 @@
         "AOP",
         "Aspect Oriented Program"
     ],
-    "contributors": [{
-        "name": "chemingjun",
-        "email": "chemingjun@weidian.com"
-    }, {
-        "name": "kangzhe",
-        "email": "kangzhe@weidian.com"
-    }, {
-        "name": "dingjunjie",
-        "email": "dingjunjie@weidian.com"
-    }],
+    "contributors": [
+        {
+            "name": "chemingjun",
+            "email": "chemingjun@weidian.com"
+        },
+        {
+            "name": "kangzhe",
+            "email": "kangzhe@weidian.com"
+        },
+        {
+            "name": "dingjunjie",
+            "email": "dingjunjie@weidian.com"
+        }
+    ],
     "license": "MIT",
     "directories": {
         "doc": "doc"
