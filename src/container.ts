@@ -39,6 +39,14 @@ export class Container {
     }
 
     /**
+     * @description export instance
+     * @returns Object
+     */
+    public static setObject(id: string, instance: object): void {
+        globalContainer.set(id, instance);
+    }
+
+    /**
      * @description Provid type's implements factory
      * @param defAry defination of IoC, include "type and instantiation"
      */
