@@ -91,7 +91,7 @@ class AspectTwo {
 
     @Pointcut({
         execution: [HookedClass, 'marked'],
-        advices: ['before', "after", "after_returning", 'After_Throwing']
+        advices: ['before', "after", "after_returning", 'after_throwing']
     })
     static pointcut(){};
 

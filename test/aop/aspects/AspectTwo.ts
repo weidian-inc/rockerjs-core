@@ -9,7 +9,7 @@ export class AspectTwo {
     @Pointcut({
         clazz: HookedClass,
         rules: '.*hooked.*',
-        advices: ['before:before', "after", "after_returning", 'After_Throwing']
+        advices: ['before:before', "after", "after_returning", 'after_throwing']
     })
     static pointcut(){};
 
