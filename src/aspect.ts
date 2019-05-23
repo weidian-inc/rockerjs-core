@@ -20,6 +20,7 @@ interface IPointcut {
     rules?: string;
     execution?: [FunctionConstructor | Function, string];
     advices?: string[];
+    scope?: "static" | "prototype";
 }
 
 interface IComposeAspectsOptions {
@@ -130,7 +131,7 @@ function adviceHandler(adviceType: "before"|"after"|"after_throwing"|"after_retu
     AspectContainer.has(targetClazz) ? (AspectContainer.get(targetClazz)[(JOIN_POINT[adviceType.toUpperCase()]).toLowerCase()].push({ 
         advice: specAdvice,
         name: key,
-    } as IAdvice), AspectContainer.get(targetClazz)[ADVICE_KEY][`adviceType:${key}`] = specAdvice) : null;
+    } as IAdvice), AspectContainer.get(targetClazz)[ADVICE_KEY][`${adviceType}:${key}`] = specAdvice) : null;
 }
 
 /**
@@ -172,13 +173,14 @@ export function Around(target: FunctionConstructor | Object, key: string, descri
 }
 
 export function Pointcut(options: IPointcut): void | any {
-    let { clazz, advices } = options;
-    const { rules, execution } = options;
+    let { clazz, scope } = options;
+    const { rules, execution, advices } = options;
+    scope ? null : scope = "prototype";
     let pointCutTypeName: string = null;
 
-    Array.isArray(advices) && (advices = advices.map((it) => {
-        return it.toLowerCase();
-    }));
+    // Array.isArray(advices) && (advices = advices.map((it) => {
+    //     return it.toLowerCase();
+    // }));
 
     /* istanbul ignore if */
     if ((typeof clazz !== "function" && typeof execution[0] !== "function") || (!clazz && !execution)) {
@@ -227,12 +229,18 @@ export function Pointcut(options: IPointcut): void | any {
             });
         }
 
-        if (rules && !pointCutTypeName) {
-            aspect.withRegex(rules).applyTo(clazz);
-        } else if (!rules && pointCutTypeName) {
-            aspect.withAnnotation(pointCutTypeName).applyTo(clazz);
-        } else {
-            aspect.applyTo(clazz);
+        if (scope === "prototype") {
+            if (rules && !pointCutTypeName) {
+                aspect.withRegex(rules).applyTo(clazz);
+            } else if (!rules && pointCutTypeName) {
+                aspect.withAnnotation(pointCutTypeName).applyTo(clazz);
+            } else {
+                aspect.applyTo(clazz);
+            }
+        } else if (scope === "static") {
+            if (rules && !pointCutTypeName) {
+                aspect.withRegex(rules).withPointcut(scope, rules).applyTo(clazz);
+            }
         }
     };
 }

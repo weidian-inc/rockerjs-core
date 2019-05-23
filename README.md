@@ -367,6 +367,7 @@ class Logger {
   // 必须在静态方法上注册切点
   @Pointcut({
     clazz: Test, // 定位被修饰的类
+    scope: "prototype", // 默认只针对实例方法做Advice，配置“static”可针对静态方法Advice
     rules: ".*foo.*", // 通过正则匹配到对应的方法，不填则匹配所有函数
     advices: ["before:printStart", "after"] // 过滤将要执行的钩子 (可细致到函数名)
   })
